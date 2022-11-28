@@ -1,20 +1,21 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import BooksContext from "../context/books";
 import BookEdit from "./BookEdit";
 
-function BookItem ({book, onDelete, onEdit }) {
+function BookItem ({book}) {
 
     const [showEdit, setShowEdit] = useState(false);
+    const { deleteBookById } = useContext(BooksContext);
 
     const handleEditClick = () => {
         setShowEdit(!showEdit);
     }
 
     const handleDeleteClick = () => {
-        onDelete(book.id);
+      deleteBookById(book.id);
     }
 
-    const handleEditSubmit = (id, newTitle) => {
-        onEdit(id, newTitle);
+    const handleEditSubmit = () => {
         setShowEdit(false);
     }
 
